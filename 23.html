@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Розклад сесії КІ-22-1 ФМБ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .container { background-color: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { margin-bottom: 1.5rem; }
+        input[type="text"] { width: 80px; }
+    </style>
+    <script>
+        function toggle(subject) {
+            const key = "checkbox_" + subject;
+            const value = localStorage.getItem(key) === "true";
+            localStorage.setItem(key, !value);
+        }
+
+        function saveGrade(subject, value) {
+            localStorage.setItem("grade_" + subject, value);
+        }
+
+        function restoreState() {
+            document.querySelectorAll("input[type='checkbox']").forEach(cb => {
+                const subject = cb.getAttribute("data-subject");
+                cb.checked = localStorage.getItem("checkbox_" + subject) === "true";
+            });
+
+            document.querySelectorAll("input[data-grade]").forEach(input => {
+                const subject = input.getAttribute("data-grade");
+                input.value = localStorage.getItem("grade_" + subject) || "";
+            });
+        }
+
+        window.onload = restoreState;
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>📘 Розклад сесії — КІ-22-1 ФМБ</h1>
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-light">
+        <tr>
+            <th>Дата</th>
+            <th>Час</th>
+            <th>Дисципліна</th>
+            <th>Викладач</th>
+            <th>✔️ Галочка</th>
+            <th>📊 Оцінка</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr><td>02.06.2025</td><td>10:00</td><td>Теорія ймовірностей</td><td>Одрібець Н.В.</td><td><input type="checkbox" data-subject="Теорія" onclick="toggle('Теорія')"></td><td><input type="text" data-grade="Теорія" oninput="saveGrade('Теорія', this.value)"></td></tr>
+            <tr><td>03.06.2025</td><td>10:00</td><td>Комп'ютерна логіка</td><td>Зубко Р.А.</td><td><input type="checkbox" data-subject="Логіка" onclick="toggle('Логіка')"></td><td><input type="text" data-grade="Логіка" oninput="saveGrade('Логіка', this.value)"></td></tr>
+            <tr><td>05.06.2025</td><td>08:30</td><td>Програмування мікроконтролерів</td><td>Самарай В.П.</td><td><input type="checkbox" data-subject="Мікро" onclick="toggle('Мікро')"></td><td><input type="text" data-grade="Мікро" oninput="saveGrade('Мікро', this.value)"></td></tr>
+            <tr><td>07.06.2025</td><td>11:40</td><td>Алгоритми (конс.)</td><td>Тимошенко А.Г.</td><td><input type="checkbox" data-subject="АлгК" onclick="toggle('АлгК')"></td><td><input type="text" data-grade="АлгК" oninput="saveGrade('АлгК', this.value)"></td></tr>
+            <tr><td>07.06.2025</td><td>13:10</td><td>Алгоритми (іспит)</td><td>Тимошенко А.Г.</td><td><input type="checkbox" data-subject="АлгІ" onclick="toggle('АлгІ')"></td><td><input type="text" data-grade="АлгІ" oninput="saveGrade('АлгІ', this.value)"></td></tr>
+            <tr><td>09.06.2025</td><td>08:30</td><td>Технології програмування</td><td>Богун Р.І.</td><td><input type="checkbox" data-subject="ТехПрог" onclick="toggle('ТехПрог')"></td><td><input type="text" data-grade="ТехПрог" oninput="saveGrade('ТехПрог', this.value)"></td></tr>
+            <tr><td>10.06.2025</td><td>11:40</td><td>Основи WEB-дизайну</td><td>Веденєєва О.А.</td><td><input type="checkbox" data-subject="WEB" onclick="toggle('WEB')"></td><td><input type="text" data-grade="WEB" oninput="saveGrade('WEB', this.value)"></td></tr>
+            <tr><td>11.06.2025</td><td>13:10</td><td>Іноземна мова</td><td>Махлай Н.Л.</td><td><input type="checkbox" data-subject="Мова" onclick="toggle('Мова')"></td><td><input type="text" data-grade="Мова" oninput="saveGrade('Мова', this.value)"></td></tr>
+            <tr><td>13.06.2025</td><td>10:00</td><td>ООП</td><td>Чорнокозинський К.С.</td><td><input type="checkbox" data-subject="ООП" onclick="toggle('ООП')"></td><td><input type="text" data-grade="ООП" oninput="saveGrade('ООП', this.value)"></td></tr>
+            <tr><td>13.06.2025</td><td>11:40</td><td>Інженерія ПЗ</td><td>Чорнокозинський К.С.</td><td><input type="checkbox" data-subject="ІнжПЗ" onclick="toggle('ІнжПЗ')"></td><td><input type="text" data-grade="ІнжПЗ" oninput="saveGrade('ІнжПЗ', this.value)"></td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
